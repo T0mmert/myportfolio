@@ -4,7 +4,7 @@
         <div class="flex justify-between h-20">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
+                <a href="{{ route('home') }}" class="flex items-center gap-3 group">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 transition-transform duration-300 group-hover:rotate-12">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -18,6 +18,11 @@
 
             <!-- Navigation Links -->
             <div class="hidden sm:flex sm:items-center sm:space-x-8">
+                <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="text-blue-300 hover:text-white transition-colors relative group">
+                    {{ __('Home') }}
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                </x-nav-link>
+
                 <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-blue-300 hover:text-white transition-colors relative group">
                     {{ __('Dashboard') }}
                     <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
@@ -29,6 +34,16 @@
                 </x-nav-link>
 
                 @auth
+                    <x-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.*')" class="text-blue-300 hover:text-white transition-colors relative group">
+                        {{ __('Projects') }}
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('admin.contacts')" :active="request()->routeIs('admin.contacts')" class="text-blue-300 hover:text-white transition-colors relative group">
+                        {{ __('Messages') }}
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                    </x-nav-link>
+
                     <!-- Settings Dropdown -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown align="right" width="48">
@@ -85,12 +100,27 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-slate-950/95 backdrop-blur-xl border-b border-blue-500/10">
         <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" class="text-blue-300 hover:text-white hover:bg-blue-500/10">
+                {{ __('Home') }}
+            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-blue-300 hover:text-white hover:bg-blue-500/10">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            
             <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')" class="text-blue-300 hover:text-white hover:bg-blue-500/10">
                 {{ __('Contact') }}
             </x-responsive-nav-link>
+
+            @auth
+                <x-responsive-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.*')" class="text-blue-300 hover:text-white hover:bg-blue-500/10">
+                    {{ __('Projects') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.contacts')" :active="request()->routeIs('admin.contacts')" class="text-blue-300 hover:text-white hover:bg-blue-500/10">
+                    {{ __('Messages') }}
+                </x-responsive-nav-link>
+            @endauth
         </div>
 
         @auth
