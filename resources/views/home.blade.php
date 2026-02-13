@@ -1,12 +1,10 @@
 <x-app-layout>
     <div style="background-color: #020617; min-height: 100vh; color: white; position: relative;">
         
-        <!-- 3D Space Background -->
         <div id="space-scene" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
 
         <div style="position: relative; z-index: 10;">
             
-            <!-- Hero Section -->
             <section style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 1rem;">
                 <div style="max-width: 72rem; margin: 0 auto; width: 100%; text-align: center; position: relative;">
                     
@@ -37,7 +35,6 @@
                 </div>
             </section>
 
-            <!-- Skills Cards (Transparent) -->
             <section style="padding: 4rem 1rem; position: relative;">
                 <div style="max-width: 80rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
                     
@@ -73,7 +70,6 @@
                 </div>
             </section>
 
-            <!-- About Section (Transparent) -->
             <section style="padding: 6rem 1rem; color: white;">
                 <div style="max-width: 72rem; margin: 0 auto;">
                     <div style="text-align: center; margin-bottom: 3rem;">
@@ -84,10 +80,13 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
                         <div>
                             <p style="font-size: 1.125rem; line-height: 1.8; color: #94a3b8; margin-bottom: 1.5rem;">
-                                test test 
+                                I am a 20 year old software developer student at Landstede Harderwijk. I love working on code and solving puzzles.
+                                Also im eager to learn everything, from languages, tools, hardware and software. 
                             </p>
                             <p style="font-size: 1.125rem; line-height: 1.8; color: #94a3b8; margin-bottom: 1.5rem;">
-                                test test 
+                               I have been studying software development for close to two years now.
+                               Languages i speak flutently are dutch and english.
+
                             </p>
                             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                                 <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;">Puzzle Solver</span>
@@ -101,20 +100,19 @@
                                 <li style="margin-bottom: 0.75rem;">🎓 Software Development Student</li>
                                 <li style="margin-bottom: 0.75rem;">💻 Web development</li>
                                 <li style="margin-bottom: 0.75rem;">🚀 Game development</li>
-                                <li style="margin-bottom: 0.75rem;">🌍 Based in Netherlands</li>
+                                <li style="margin-bottom: 0.75rem;">🌍 Based in Netherlands </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Projects Section (Transparent) -->
             <section id="projects" style="padding: 6rem 1rem; color: white;">
                 <div style="max-width: 80rem; margin: 0 auto;">
                     <div style="text-align: center; margin-bottom: 3rem;">
                         <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">My Projects</h2>
                         <div style="width: 5rem; height: 0.25rem; background: linear-gradient(to right, #3b82f6, #8b5cf6); margin: 0 auto;"></div>
-                        <p style="color: #94a3b8; margin-top: 1rem;">A selection of my recent work</p>
+                        <p style="color: #94a3b8; margin-top: 1rem;">A selection of my works</p>
                     </div>
 
                     @if(isset($projects) && $projects->count() > 0)
@@ -125,8 +123,7 @@
                                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(59, 130, 246, 0.2)'">
                                     
                                     @if($project->image)
-                                        <img src="{{ asset('storage/' . $project->image) }}" style="width: 100%; height: 200px; object-fit: cover;">
-                                    @else
+                                        <img src="{{ asset($project->image) }}" style="width: 100%; height: 200px; object-fit: cover;">                                    @else
                                         <div style="width: 100%; height: 200px; background: linear-gradient(to right, #1e3a8a, #312e81); display: flex; align-items: center; justify-content: center;">
                                             <span style="color: #64748b;">No Image</span>
                                         </div>
@@ -189,7 +186,6 @@
                 </div>
             </section>
 
-            <!-- Call to Action (Transparent) -->
             <section style="padding: 4rem 1rem; color: white; text-align: center;">
                 <div style="max-width: 48rem; margin: 0 auto;">
                     <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Let's Work Together</h2>

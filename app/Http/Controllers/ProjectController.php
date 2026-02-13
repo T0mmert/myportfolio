@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProjectController extends Controller
 {
@@ -42,8 +43,13 @@ class ProjectController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('projects', 'public');
-            $validated['image'] = $path;
+            // Generate unique filename
+            $filename = uniqid() . '_' . time() . '.' . $request->file('image')->extension();
+            
+            // Store in public/projects directory (not storage)
+            $request->file('image')->move(public_path('projects'), $filename);
+            
+            $validated['image'] = 'projects/' . $filename;
         }
 
         $validated['is_featured'] = $request->boolean('is_featured');
@@ -74,11 +80,18 @@ class ProjectController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($project->image) {
-                Storage::disk('public')->delete($project->image);
+            // Delete old image if exists
+            if ($project->image && file_exists(public_path($project->image))) {
+                unlink(public_path($project->image));
             }
-            $path = $request->file('image')->store('projects', 'public');
-            $validated['image'] = $path;
+            
+            // Generate unique filename
+            $filename = uniqid() . '_' . time() . '.' . $request->file('image')->extension();
+            
+            // Store in public/projects directory
+            $request->file('image')->move(public_path('projects'), $filename);
+            
+            $validated['image'] = 'projects/' . $filename;
         }
 
         $validated['is_featured'] = $request->boolean('is_featured');
@@ -92,8 +105,9 @@ class ProjectController extends Controller
     // Admin: Delete project
     public function destroy(Project $project)
     {
-        if ($project->image) {
-            Storage::disk('public')->delete($project->image);
+        // Delete image if exists
+        if ($project->image && file_exists(public_path($project->image))) {
+            unlink(public_path($project->image));
         }
         
         $project->delete();
